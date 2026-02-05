@@ -8,6 +8,7 @@ const API_URL = 'http://localhost:5000/api';
 
 const Navbar = ({ onSearch }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -15,29 +16,109 @@ const Navbar = ({ onSearch }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navLinks = [
+    { name: 'Comprar', href: '#catalog', onClick: () => onSearch('') },
+    { name: 'Vender', href: '#vender' },
+    { name: 'Financiación', href: '#finance' },
+    { name: 'Nosotros', href: '#about' },
+  ];
+
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-md py-4 shadow-xl' : 'bg-transparent py-6'}`}>
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        <div className="flex items-center gap-3 group cursor-pointer">
-          <img src={logo} alt="Punto Car" className="h-12 w-auto rounded-xl border border-white/20 group-hover:scale-110 transition-transform shadow-lg shadow-accent/20" />
-          <span className="text-white font-black text-2xl tracking-tighter">PUNTO CAR</span>
+    <>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-md py-4 shadow-xl' : 'bg-transparent py-6'}`}>
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <img src={logo} alt="Punto Car" className="h-12 w-auto rounded-xl border border-white/20 group-hover:scale-110 transition-transform shadow-lg shadow-accent/20" />
+            <span className="text-white font-black text-2xl tracking-tighter">PUNTO CAR</span>
+          </div>
+          <div className="hidden lg:flex items-center gap-10 text-white/90 font-semibold uppercase text-sm tracking-widest">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={link.onClick}
+                className="hover:text-accent transition-colors relative group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full" />
+              </a>
+            ))}
+          </div>
+          <div className="flex items-center gap-6">
+            <button className="hidden md:flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full border border-white/10 transition-all font-bold text-sm">
+              <User size={18} /> Iniciar Sesión
+            </button>
+            <button
+              className="lg:hidden text-white p-2 hover:bg-white/10 rounded-xl transition-colors"
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
+              <Menu size={28} />
+            </button>
+          </div>
         </div>
-        <div className="hidden lg:flex items-center gap-10 text-white/90 font-semibold uppercase text-sm tracking-widest">
-          <a href="#catalog" onClick={() => onSearch('')} className="hover:text-accent transition-colors">Comprar</a>
-          <a href="#vender" className="hover:text-accent transition-colors">Vender</a>
-          <a href="#finance" className="hover:text-accent transition-colors">Financiación</a>
-          <a href="#about" className="hover:text-white transition-colors">Nosotros</a>
-        </div>
-        <div className="flex items-center gap-6">
-          <button className="hidden md:flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full border border-white/10 transition-all font-bold text-sm">
-            <User size={18} /> Iniciar Sesión
-          </button>
-          <button className="lg:hidden text-white">
-            <Menu size={28} />
-          </button>
-        </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[100] bg-black flex flex-col p-8 lg:hidden"
+          >
+            <div className="flex justify-between items-center mb-16">
+              <div className="flex items-center gap-3">
+                <img src={logo} alt="Punto Car" className="h-10 w-auto rounded-lg" />
+                <span className="text-white font-black text-xl tracking-tighter">PUNTO CAR</span>
+              </div>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-white p-2 hover:bg-white/10 rounded-xl transition-colors"
+              >
+                <X size={32} />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-8">
+              {navLinks.map((link, i) => (
+                <motion.a
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => {
+                    if (link.onClick) link.onClick();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-4xl font-black text-white hover:text-accent transition-colors"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="mt-8 bg-accent text-white py-5 rounded-2xl font-black text-xl shadow-xl shadow-accent/20"
+              >
+                Iniciar Sesión
+              </motion.button>
+            </div>
+
+            <div className="mt-auto border-t border-white/10 pt-8 flex justify-between items-center">
+              <p className="text-white/40 text-sm font-bold uppercase tracking-widest italic">Punto Car Premium</p>
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white">IG</div>
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white">FB</div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
