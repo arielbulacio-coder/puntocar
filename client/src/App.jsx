@@ -48,9 +48,25 @@ const Hero = () => {
         <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
       </div>
       <div className="relative container mx-auto px-6 text-center text-white z-10">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mb-8 flex justify-center"
+        >
+          <div className="relative group">
+            <div className="absolute inset-0 bg-accent/30 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <img
+              src={logo}
+              alt="Punto Car Logo"
+              className="h-32 md:h-48 w-auto rounded-2xl shadow-2xl border-4 border-white/10 relative z-10 hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+        </motion.div>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
           className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
         >
           El auto de tus sueños, <br /><span className="text-accent">al mejor precio.</span>
