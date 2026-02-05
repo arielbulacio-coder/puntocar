@@ -1,8 +1,12 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-primary: #000000;
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --font-sans: 'Inter', sans-serif;
+}
 
 :root {
   --primary: #000000;
