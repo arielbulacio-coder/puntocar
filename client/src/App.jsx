@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/90 backdrop-blur-md py-4' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <img src="/logo.jpg" alt="Punto Car" className="h-10 w-auto rounded border border-white/20" />
+          <img src="logo.jpg" alt="Punto Car" className="h-10 w-auto rounded border border-white/20" />
           <span className="text-white font-bold text-2xl tracking-tighter">PUNTO CAR</span>
         </div>
         <div className="hidden md:flex items-center gap-8 text-white/80 font-medium">
@@ -114,7 +114,7 @@ const Footer = () => (
     <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
       <div className="col-span-1 md:col-span-1">
         <div className="flex items-center gap-2 mb-6">
-          <img src="/logo.jpg" alt="Punto Car" className="h-10 w-auto rounded" />
+          <img src="logo.jpg" alt="Punto Car" className="h-10 w-auto rounded" />
           <span className="font-bold text-2xl tracking-tighter">PUNTO CAR</span>
         </div>
         <p className="text-white/60">Líderes en compra y venta de autos usados en Argentina. Tecnología y confianza de punta a punta.</p>
