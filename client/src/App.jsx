@@ -6,7 +6,7 @@ import logo from './assets/logo.jpg';
 
 const API_URL = 'http://localhost:5000/api';
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -16,24 +16,24 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/90 backdrop-blur-md py-4' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-md py-4 shadow-xl' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <img src={logo} alt="Punto Car" className="h-10 w-auto rounded border border-white/20" />
-          <span className="text-white font-bold text-2xl tracking-tighter">PUNTO CAR</span>
+        <div className="flex items-center gap-3 group cursor-pointer">
+          <img src={logo} alt="Punto Car" className="h-12 w-auto rounded-xl border border-white/20 group-hover:scale-110 transition-transform shadow-lg shadow-accent/20" />
+          <span className="text-white font-black text-2xl tracking-tighter">PUNTO CAR</span>
         </div>
-        <div className="hidden md:flex items-center gap-8 text-white/80 font-medium">
-          <a href="#" className="hover:text-white transition-colors">Comprar</a>
-          <a href="#" className="hover:text-white transition-colors">Vender</a>
-          <a href="#" className="hover:text-white transition-colors">Financiación</a>
-          <a href="#" className="hover:text-white transition-colors">Nosotros</a>
+        <div className="hidden lg:flex items-center gap-10 text-white/90 font-semibold uppercase text-sm tracking-widest">
+          <a href="#catalog" onClick={() => onSearch('')} className="hover:text-accent transition-colors">Comprar</a>
+          <a href="#vender" className="hover:text-accent transition-colors">Vender</a>
+          <a href="#finance" className="hover:text-accent transition-colors">Financiación</a>
+          <a href="#about" className="hover:text-white transition-colors">Nosotros</a>
         </div>
-        <div className="flex items-center gap-4">
-          <button className="text-white p-2 hover:bg-white/10 rounded-full transition-all">
-            <User size={20} />
+        <div className="flex items-center gap-6">
+          <button className="hidden md:flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full border border-white/10 transition-all font-bold text-sm">
+            <User size={18} /> Iniciar Sesión
           </button>
-          <button className="md:hidden text-white">
-            <Menu size={24} />
+          <button className="lg:hidden text-white">
+            <Menu size={28} />
           </button>
         </div>
       </div>
@@ -41,58 +41,132 @@ const Navbar = () => {
   );
 };
 
-const Hero = () => {
+const FiltersSidebar = ({ filters, setFilters, brands, years }) => {
   return (
-    <div className="relative h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-hero-pattern bg-cover bg-center">
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
+    <div className="space-y-10 pr-8">
+      <div>
+        <h4 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-2 uppercase tracking-tighter">
+          <Filter size={18} className="text-accent" /> Filtros
+        </h4>
+        <div className="space-y-8">
+          {/* Brand Filter */}
+          <div>
+            <label className="text-xs font-black text-slate-400 uppercase tracking-widest block mb-4">Marca</label>
+            <div className="grid grid-cols-1 gap-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+              <button
+                onClick={() => setFilters({ ...filters, brand: '' })}
+                className={`text-left px-4 py-3 rounded-xl text-sm font-bold transition-all ${!filters.brand ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'bg-white text-slate-600 hover:bg-slate-100'}`}
+              >
+                Todas las marcas
+              </button>
+              {brands.map(brand => (
+                <button
+                  key={brand}
+                  onClick={() => setFilters({ ...filters, brand })}
+                  className={`text-left px-4 py-3 rounded-xl text-sm font-bold transition-all ${filters.brand === brand ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'bg-white text-slate-600 hover:bg-slate-100'}`}
+                >
+                  {brand}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Price Range */}
+          <div>
+            <label className="text-xs font-black text-slate-400 uppercase tracking-widest block mb-4">Precio (hasta)</label>
+            <input
+              type="range"
+              min="0"
+              max="150000"
+              step="5000"
+              value={filters.maxPrice}
+              onChange={(e) => setFilters({ ...filters, maxPrice: parseInt(e.target.value) })}
+              className="w-full accent-accent bg-slate-200 h-2 rounded-lg cursor-pointer"
+            />
+            <span className="text-sm font-black text-slate-900 mt-2 block">${filters.maxPrice.toLocaleString()}</span>
+          </div>
+
+          {/* Year Range */}
+          <div>
+            <label className="text-xs font-black text-slate-400 uppercase tracking-widest block mb-4">Año mínimo</label>
+            <select
+              value={filters.minYear}
+              onChange={(e) => setFilters({ ...filters, minYear: parseInt(e.target.value) })}
+              className="w-full p-4 bg-white border border-slate-100 rounded-2xl font-bold text-slate-800 shadow-sm focus:ring-2 focus:ring-accent/50 outline-none"
+            >
+              <option value="2000">Desde todos los años</option>
+              {years.map(year => <option key={year} value={year}>{year}</option>)}
+            </select>
+          </div>
+        </div>
       </div>
-      <div className="relative container mx-auto px-6 text-center text-white z-10">
+      <button
+        onClick={() => setFilters({ brand: '', maxPrice: 150000, minYear: 2000, search: '' })}
+        className="w-full py-4 text-xs font-black text-slate-400 hover:text-accent uppercase tracking-widest transition-colors flex items-center justify-center gap-2 border-t border-slate-100 pt-6"
+      >
+        <X size={14} /> Limpiar Filtros
+      </button>
+    </div>
+  );
+};
+
+const Hero = ({ onSearch }) => {
+  const [searchValue, setSearchValue] = useState('');
+
+  return (
+    <div className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 bg-hero-pattern bg-cover bg-center scale-105 active:scale-100 transition-transform duration-1000">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-slate-50" />
+      </div>
+      <div className="relative container mx-auto px-6 text-center text-white z-10 pt-20">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mb-8 flex justify-center"
+          className="mb-12 flex justify-center"
         >
           <div className="relative group">
-            <div className="absolute inset-0 bg-accent/30 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-accent/30 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <img
               src={logo}
               alt="Punto Car Logo"
-              className="h-32 md:h-48 w-auto rounded-2xl shadow-2xl border-4 border-white/10 relative z-10 hover:scale-105 transition-transform duration-300"
+              className="h-40 md:h-60 w-auto rounded-[2rem] shadow-[0_0_50px_rgba(225,6,0,0.3)] border-2 border-white/10 relative z-10 hover:rotate-2 transition-transform duration-500"
             />
           </div>
         </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
-        >
-          El auto de tus sueños, <br /><span className="text-accent">al mejor precio.</span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-xl md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto"
-        >
-          Compra y vende autos usados con la confianza y garantía de Punto Car.
-        </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="max-w-4xl mx-auto bg-white rounded-2xl p-2 shadow-2xl flex flex-col md:flex-row gap-2"
+          transition={{ delay: 0.3 }}
+          className="max-w-4xl mx-auto"
         >
-          <div className="flex-1 flex items-center px-4 border-b md:border-b-0 md:border-r border-slate-100">
-            <Search className="text-slate-400 mr-2" size={20} />
-            <input type="text" placeholder="Buscá marca, modelo o año..." className="w-full py-4 focus:outline-none text-slate-800" />
+          <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-[ -0.05em]">
+            COMPRÁ TU AUTO <br /><span className="text-accent italic">A TU MANERA.</span>
+          </h1>
+          <p className="text-lg md:text-xl text-white/70 mb-12 font-medium max-w-xl mx-auto uppercase tracking-tighter">
+            La mayor selección de usados premium con garantía total.
+          </p>
+
+          <div className="max-w-2xl mx-auto bg-white/10 backdrop-blur-3xl rounded-[2.5rem] p-2 border border-white/20 shadow-3xl flex flex-col md:flex-row gap-2">
+            <div className="flex-1 flex items-center px-8">
+              <Search className="text-accent mr-3" size={24} />
+              <input
+                type="text"
+                placeholder="Busca por Marca, Modelo..."
+                className="w-full py-6 focus:outline-none text-white placeholder-white/40 bg-transparent font-bold text-lg"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && onSearch(searchValue)}
+              />
+            </div>
+            <button
+              onClick={() => onSearch(searchValue)}
+              className="bg-accent hover:bg-accent-hover text-white px-12 py-6 rounded-[2rem] font-black text-lg transition-all shadow-xl shadow-accent/20 active:scale-95 flex items-center justify-center gap-3"
+            >
+              Buscar <ChevronRight size={24} />
+            </button>
           </div>
-          <button className="btn-accent rounded-xl flex items-center justify-center gap-2">
-            Ver catálogo <ChevronRight size={20} />
-          </button>
         </motion.div>
       </div>
     </div>
@@ -332,16 +406,26 @@ const MOCK_CARS = [
 
 export default function App() {
   const [cars, setCars] = useState([]);
+  const [filteredCars, setFilteredCars] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({
+    brand: '',
+    minYear: 2010,
+    maxPrice: 150000,
+    search: ''
+  });
+  const [sort, setSort] = useState('newest');
 
   useEffect(() => {
     const fetchCars = async () => {
       try {
         const response = await axios.get(API_URL + '/cars');
-        setCars(response.data.length > 0 ? response.data : MOCK_CARS);
+        const data = response.data.length > 0 ? response.data : MOCK_CARS;
+        setCars(data);
+        setFilteredCars(data);
       } catch (err) {
-        console.warn('API not reachable, using mock data');
         setCars(MOCK_CARS);
+        setFilteredCars(MOCK_CARS);
       } finally {
         setLoading(false);
       }
@@ -349,48 +433,138 @@ export default function App() {
     fetchCars();
   }, []);
 
-  return (
-    <div className="min-h-screen bg-slate-50">
-      <Navbar />
-      <Hero />
+  useEffect(() => {
+    let result = [...cars];
 
-      <main className="container mx-auto px-6 py-20">
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <span className="text-accent font-bold tracking-widest uppercase text-sm">Nuestra selección</span>
-            <h2 className="text-4xl font-black text-slate-900 mt-2">Autos Destacados</h2>
+    // Filter by Search
+    if (filters.search) {
+      const term = filters.search.toLowerCase();
+      result = result.filter(c =>
+        c.brand.toLowerCase().includes(term) ||
+        c.model.toLowerCase().includes(term)
+      );
+    }
+
+    // Filter by Brand
+    if (filters.brand) {
+      result = result.filter(c => c.brand === filters.brand);
+    }
+
+    // Filter by Year
+    result = result.filter(c => c.year >= filters.minYear);
+
+    // Filter by Price
+    result = result.filter(c => c.price <= filters.maxPrice);
+
+    // Sort
+    if (sort === 'price-asc') result.sort((a, b) => a.price - b.price);
+    if (sort === 'price-desc') result.sort((a, b) => b.price - a.price);
+    if (sort === 'newest') result.sort((a, b) => b.year - a.year);
+
+    setFilteredCars(result);
+  }, [filters, sort, cars]);
+
+  const brands = Array.from(new Set(MOCK_CARS.map(c => c.brand))).sort();
+  const years = Array.from(new Set(MOCK_CARS.map(c => c.year))).sort((a, b) => b - a);
+
+  return (
+    <div className="min-h-screen bg-slate-50 selection:bg-accent selection:text-white">
+      <Navbar onSearch={(search) => setFilters({ ...filters, search })} />
+      <Hero onSearch={(search) => setFilters({ ...filters, search })} />
+
+      <main id="catalog" className="container mx-auto px-6 py-24">
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* Sidebar */}
+          <aside className="w-full lg:w-72 lg:shrink-0">
+            <div className="sticky top-28 bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50">
+              <FiltersSidebar
+                filters={filters}
+                setFilters={setFilters}
+                brands={brands}
+                years={years}
+              />
+            </div>
+          </aside>
+
+          {/* Content */}
+          <div className="flex-1">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+              <div>
+                <h2 className="text-4xl font-black text-slate-900 leading-tight">Catálogo <span className="text-accent underline decoration-4 decoration-accent/20">Premium</span></h2>
+                <p className="text-slate-500 font-bold mt-2 uppercase tracking-widest text-xs">
+                  {filteredCars.length} Vehículos Disponibles
+                </p>
+              </div>
+              <div className="flex items-center gap-4 bg-white p-2 rounded-2xl border border-slate-100 shadow-sm">
+                <span className="text-xs font-black text-slate-400 uppercase tracking-widest pl-4">Ordenar:</span>
+                <select
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value)}
+                  className="bg-transparent font-bold text-slate-800 focus:outline-none pr-4 py-2 cursor-pointer"
+                >
+                  <option value="newest">Más nuevos</option>
+                  <option value="price-asc">Menor precio</option>
+                  <option value="price-desc">Mayor precio</option>
+                </select>
+              </div>
+            </div>
+
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="h-96 bg-slate-200 animate-pulse rounded-[2.5rem]" />
+                ))}
+              </div>
+            ) : filteredCars.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {filteredCars.map(car => (
+                  <CarCard key={car.id} car={car} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-32 bg-white rounded-[3rem] border-2 border-dashed border-slate-200">
+                <div className="bg-slate-50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Search size={40} className="text-slate-300" />
+                </div>
+                <h3 className="text-2xl font-black text-slate-900 mb-2">No encontramos resultados</h3>
+                <p className="text-slate-500 mb-8 font-medium">Probá cambiando los filtros o buscando otro modelo.</p>
+                <button
+                  onClick={() => setFilters({ brand: '', maxPrice: 150000, minYear: 2000, search: '' })}
+                  className="btn-accent px-10 py-4"
+                >
+                  Ver todos los autos
+                </button>
+              </div>
+            )}
           </div>
-          <button className="flex items-center gap-2 font-bold text-accent hover:underline">
-            Ver todos <ChevronRight size={16} />
-          </button>
         </div>
 
-        {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="h-80 bg-slate-200 animate-pulse rounded-3xl" />
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {cars.map(car => (
-              <CarCard key={car.id} car={car} />
-            ))}
-          </div>
-        )}
-
-        <section className="mt-40 bg-black rounded-[3rem] p-12 md:p-20 relative overflow-hidden">
-          <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1 text-white">
-              <h2 className="text-4xl md:text-5xl font-black mb-8 leading-tight">¿Querés vender <br />tu auto hoy?</h2>
-              <p className="text-xl text-white/60 mb-12 max-w-lg">Obtené una cotización al instante y vendé tu auto en menos de 24 horas. Sin vueltas, sin riesgos.</p>
-              <button className="btn-accent px-10 py-5 text-lg">Cotizar ahora</button>
+        {/* Sell Section */}
+        <section id="vender" className="mt-48 relative rounded-[3.5rem] overflow-hidden bg-primary p-12 md:p-24 shadow-2xl">
+          <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=2000')] bg-cover bg-center" />
+          <div className="relative z-10 grid md:grid-cols-2 gap-20 items-center">
+            <div>
+              <span className="bg-accent text-white px-5 py-2 rounded-full text-xs font-black uppercase tracking-[0.2em] mb-8 inline-block shadow-lg shadow-accent/20">Venta rápida</span>
+              <h2 className="text-5xl md:text-7xl font-black text-white mb-8 leading-[0.9] tracking-tighter">¿QUERÉS VENDER <br /><span className="text-accent italic">TU AUTO HOY?</span></h2>
+              <p className="text-xl text-white/50 mb-12 max-w-lg leading-relaxed font-medium">Cotizamos tu auto en el acto. Pago inmediato, sin riesgos y con toda la transferencia a nuestro cargo.</p>
+              <div className="flex flex-col sm:flex-row gap-6">
+                <button className="bg-accent hover:bg-accent-hover text-white px-12 py-6 rounded-[2rem] font-black text-lg transition-all shadow-xl shadow-accent/20 active:scale-95">Cotizar ahora</button>
+                <button className="bg-white/10 hover:bg-white/20 text-white px-12 py-6 rounded-[2rem] font-bold text-lg backdrop-blur-md transition-all border border-white/10">Ver cómo funciona</button>
+              </div>
             </div>
-            <div className="flex-1">
-              <img src="https://images.unsplash.com/photo-1549317661-bd348a54c2b1?q=80&w=1000&auto=format&fit=crop" alt="Vender auto" className="rounded-3xl shadow-2xl skew-y-3" />
+            <div className="hidden md:block">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="bg-white/5 p-8 rounded-[2.5rem] backdrop-blur-xl border border-white/5">
+                  <h4 className="text-4xl font-black text-accent mb-2">+5k</h4>
+                  <p className="text-sm font-bold text-white/40 uppercase tracking-widest">Autos comprados</p>
+                </div>
+                <div className="bg-white/5 p-8 rounded-[2.5rem] backdrop-blur-xl border border-white/5 mt-12">
+                  <h4 className="text-4xl font-black text-accent mb-2">24h</h4>
+                  <p className="text-sm font-bold text-white/40 uppercase tracking-widest">Pago garantizado</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-accent/20 rounded-full blur-[100px]" />
         </section>
       </main>
 
