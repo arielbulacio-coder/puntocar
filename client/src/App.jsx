@@ -194,9 +194,9 @@ const MOCK_CARS = [
   {
     id: 1,
     brand: 'Toyota',
-    model: 'Corolla 1.8 Segmento G',
+    model: 'Corolla 1.8 Segmento G Exclusive',
     year: 2022,
-    price: 25000,
+    price: 25900,
     mileage: 15400,
     transmission: 'Automático',
     fuel: 'Nafta',
@@ -205,9 +205,9 @@ const MOCK_CARS = [
   {
     id: 2,
     brand: 'BMW',
-    model: 'Series 3 320i Sport-Line',
+    model: 'Series 3 320i Sport-Line Plus',
     year: 2022,
-    price: 38500,
+    price: 39800,
     mileage: 12100,
     transmission: 'Automático',
     fuel: 'Nafta',
@@ -216,7 +216,7 @@ const MOCK_CARS = [
   {
     id: 3,
     brand: 'Ford',
-    model: 'Mustang GT V8 Premium',
+    model: 'Mustang GT V8 Premium Performance',
     year: 2020,
     price: 45000,
     mileage: 20500,
@@ -227,20 +227,20 @@ const MOCK_CARS = [
   {
     id: 4,
     brand: 'Volkswagen',
-    model: 'Golf GTI Performance',
+    model: 'Golf GTI Performance Pack',
     year: 2023,
-    price: 31000,
+    price: 32500,
     mileage: 5200,
-    transmission: 'Manual',
+    transmission: 'DSG Automático',
     fuel: 'Nafta',
     images: JSON.stringify(['https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=1000&auto=format&fit=crop'])
   },
   {
     id: 5,
     brand: 'Audi',
-    model: 'Q5 45 TFSI Quattro',
+    model: 'Q5 45 TFSI Quattro S-Line',
     year: 2021,
-    price: 42000,
+    price: 43200,
     mileage: 28000,
     transmission: 'Automático',
     fuel: 'Híbrido',
@@ -249,13 +249,79 @@ const MOCK_CARS = [
   {
     id: 6,
     brand: 'Mercedes-Benz',
-    model: 'Clase C 200 Avantgarde',
+    model: 'Clase C 200 Avantgarde Night Pack',
     year: 2023,
-    price: 49500,
+    price: 51200,
     mileage: 3500,
     transmission: 'Automático',
-    fuel: 'Híbrido/Nafta',
+    fuel: 'Electrificado',
     images: JSON.stringify(['https://images.unsplash.com/photo-1622336496253-199651525547?q=80&w=1000&auto=format&fit=crop'])
+  },
+  {
+    id: 7,
+    brand: 'Porsche',
+    model: '911 Carrera S Turbo Look',
+    year: 2019,
+    price: 125000,
+    mileage: 12000,
+    transmission: 'PDK Automático',
+    fuel: 'Nafta',
+    images: JSON.stringify(['https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1000&auto=format&fit=crop'])
+  },
+  {
+    id: 8,
+    brand: 'Land Rover',
+    model: 'Range Rover Sport Dynamic',
+    year: 2022,
+    price: 89000,
+    mileage: 8500,
+    transmission: '4x4 Automático',
+    fuel: 'Diesel',
+    images: JSON.stringify(['https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1000&auto=format&fit=crop'])
+  },
+  {
+    id: 9,
+    brand: 'Jeep',
+    model: 'Wrangler Rubicon Unlimited',
+    year: 2021,
+    price: 65000,
+    mileage: 18000,
+    transmission: 'Manual 4x4',
+    fuel: 'Nafta',
+    images: JSON.stringify(['https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1000&auto=format&fit=crop'])
+  },
+  {
+    id: 10,
+    brand: 'Tesla',
+    model: 'Model 3 Long Range',
+    year: 2023,
+    price: 42000,
+    mileage: 1200,
+    transmission: 'Direct Drive',
+    fuel: 'Eléctrico',
+    images: JSON.stringify(['https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=1000&auto=format&fit=crop'])
+  },
+  {
+    id: 11,
+    brand: 'Honda',
+    model: 'Civic Type R Limited Edition',
+    year: 2021,
+    price: 38900,
+    mileage: 9400,
+    transmission: 'Manual',
+    fuel: 'Nafta',
+    images: JSON.stringify(['https://images.unsplash.com/photo-1594508601248-20d755714341?q=80&w=1000&auto=format&fit=crop'])
+  },
+  {
+    id: 12,
+    brand: 'Chevrolet',
+    model: 'Camaro SS V8 Muscle',
+    year: 2022,
+    price: 48500,
+    mileage: 4200,
+    transmission: 'Automático',
+    fuel: 'Nafta',
+    images: JSON.stringify(['https://images.unsplash.com/photo-1552519507-8d93c0bc3762?q=80&w=1000&auto=format&fit=crop'])
   }
 ];
 
