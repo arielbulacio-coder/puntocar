@@ -107,7 +107,12 @@ const CarCard = ({ car }) => {
       className="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 group"
     >
       <div className="relative h-64 overflow-hidden">
-        <img src={images[0]} alt={car.model} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        <img
+          src={images[0]}
+          alt={car.model}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=800&auto=format&fit=crop'; }}
+        />
         <div className="absolute top-4 left-4 bg-accent text-white px-3 py-1 rounded-lg text-sm font-bold shadow-lg">
           {car.year}
         </div>
@@ -200,7 +205,7 @@ const MOCK_CARS = [
     mileage: 15400,
     transmission: 'Automático',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1621339011221-16089853905c?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1593714604578-d9e41b00c6c6?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 2,
@@ -211,7 +216,7 @@ const MOCK_CARS = [
     mileage: 12100,
     transmission: 'Automático',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1555214107-f2e7c485a488?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1556139930-c23fa4a4f934?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 3,
@@ -222,7 +227,7 @@ const MOCK_CARS = [
     mileage: 20500,
     transmission: 'Automático',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1584345604481-0304e76993a4?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1584345604481-0304e76993a4?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 4,
@@ -233,7 +238,7 @@ const MOCK_CARS = [
     mileage: 5200,
     transmission: 'DSG Automático',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 5,
@@ -244,7 +249,7 @@ const MOCK_CARS = [
     mileage: 28000,
     transmission: 'Automático',
     fuel: 'Híbrido',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1541443131876-44b03de101c5?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1541443131876-44b03de101c5?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 6,
@@ -255,7 +260,7 @@ const MOCK_CARS = [
     mileage: 3500,
     transmission: 'Automático',
     fuel: 'Electrificado',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1622336496253-199651525547?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1622336496253-199651525547?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 7,
@@ -266,7 +271,7 @@ const MOCK_CARS = [
     mileage: 12000,
     transmission: 'PDK Automático',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 8,
@@ -277,7 +282,7 @@ const MOCK_CARS = [
     mileage: 8500,
     transmission: '4x4 Automático',
     fuel: 'Diesel',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1606148332159-00109cc99da5?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1606148332159-00109cc99da5?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 9,
@@ -288,7 +293,7 @@ const MOCK_CARS = [
     mileage: 18000,
     transmission: 'Manual 4x4',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 10,
@@ -299,7 +304,7 @@ const MOCK_CARS = [
     mileage: 1200,
     transmission: 'Direct Drive',
     fuel: 'Eléctrico',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1536700503339-1e4b06520771?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1545641203-7d072a14e3b2?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 11,
@@ -310,7 +315,7 @@ const MOCK_CARS = [
     mileage: 9400,
     transmission: 'Manual',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1605515298946-d062f2e9da53?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 12,
@@ -321,7 +326,7 @@ const MOCK_CARS = [
     mileage: 4200,
     transmission: 'Automático',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?q=80&w=1000&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?q=80&w=800&auto=format&fit=crop'])
   }
 ];
 
