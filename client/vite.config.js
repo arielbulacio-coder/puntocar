@@ -16,17 +16,24 @@ export default defineConfig({
         name: 'Punto Car',
         short_name: 'PuntoCar',
         description: 'Compra y venta de autos usados premium',
-        theme_color: '#000000',
+        theme_color: '#0B0E14',
+        background_color: '#0B0E14',
         icons: [
           {
-            src: 'logo.jpg',
+            src: 'pwa-logo.png',
             sizes: '192x192',
-            type: 'image/jpg'
+            type: 'image/png'
           },
           {
-            src: 'logo.jpg',
+            src: 'pwa-logo.png',
             sizes: '512x512',
-            type: 'image/jpg'
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-logo.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
           }
         ]
       }
