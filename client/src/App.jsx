@@ -106,18 +106,43 @@ const CarCard = ({ car }) => {
       whileHover={{ y: -10 }}
       className="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 group"
     >
-      <div className="relative h-56 overflow-hidden">
+      <div className="relative h-64 overflow-hidden">
         <img src={images[0]} alt={car.model} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-        <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-lg text-sm font-semibold">
+        <div className="absolute top-4 left-4 bg-accent text-white px-3 py-1 rounded-lg text-sm font-bold shadow-lg">
           {car.year}
+        </div>
+        <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-lg text-xs font-medium">
+          {car.status === 'sold' ? 'VENDIDO' : 'DISPONIBLE'}
         </div>
       </div>
       <div className="p-6">
-        <h3 className="text-xl font-bold text-slate-900 mb-1">{car.brand} {car.model}</h3>
-        <p className="text-slate-500 mb-4">{car.mileage.toLocaleString()} km • {car.transmission}</p>
-        <div className="flex justify-between items-center">
-          <span className="text-2xl font-black text-slate-900">${car.price.toLocaleString()}</span>
-          <button className="p-3 bg-slate-50 hover:bg-accent hover:text-white rounded-2xl transition-all">
+        <div className="flex justify-between items-start mb-2">
+          <div>
+            <h3 className="text-xl font-bold text-slate-900">{car.brand}</h3>
+            <p className="text-slate-500 font-medium">{car.model}</p>
+          </div>
+          <span className="bg-slate-100 text-slate-600 px-2 py-1 rounded-md text-xs font-bold ring-1 ring-slate-200">
+            {car.transmission}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 mb-6 text-sm text-slate-500">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-slate-300" />
+            {car.mileage.toLocaleString()} km
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-slate-300" />
+            {car.fuel || 'Nafta'}
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center pt-4 border-t border-slate-50">
+          <div>
+            <span className="text-xs text-slate-400 block uppercase tracking-wider font-bold">Precio</span>
+            <span className="text-2xl font-black text-slate-900">${car.price.toLocaleString()}</span>
+          </div>
+          <button className="p-4 bg-primary text-white hover:bg-accent rounded-2xl transition-all shadow-lg active:scale-90">
             <ChevronRight size={20} />
           </button>
         </div>
@@ -169,32 +194,68 @@ const MOCK_CARS = [
   {
     id: 1,
     brand: 'Toyota',
-    model: 'Corolla',
+    model: 'Corolla 1.8 Segmento G',
     year: 2022,
     price: 25000,
-    mileage: 15000,
-    transmission: 'Automatic',
+    mileage: 15400,
+    transmission: 'Automático',
+    fuel: 'Nafta',
     images: JSON.stringify(['https://images.unsplash.com/photo-1621339011221-16089853905c?q=80&w=1000&auto=format&fit=crop'])
   },
   {
     id: 2,
     brand: 'BMW',
-    model: 'Series 3',
+    model: 'Series 3 320i Sport-Line',
     year: 2022,
-    price: 38000,
-    mileage: 12000,
-    transmission: 'Automatic',
+    price: 38500,
+    mileage: 12100,
+    transmission: 'Automático',
+    fuel: 'Nafta',
     images: JSON.stringify(['https://images.unsplash.com/photo-1555214107-f2e7c485a488?q=80&w=1000&auto=format&fit=crop'])
   },
   {
     id: 3,
     brand: 'Ford',
-    model: 'Mustang',
+    model: 'Mustang GT V8 Premium',
     year: 2020,
     price: 45000,
-    mileage: 20000,
-    transmission: 'Automatic',
+    mileage: 20500,
+    transmission: 'Automático',
+    fuel: 'Nafta',
     images: JSON.stringify(['https://images.unsplash.com/photo-1584345604481-0304e76993a4?q=80&w=1000&auto=format&fit=crop'])
+  },
+  {
+    id: 4,
+    brand: 'Volkswagen',
+    model: 'Golf GTI Performance',
+    year: 2023,
+    price: 31000,
+    mileage: 5200,
+    transmission: 'Manual',
+    fuel: 'Nafta',
+    images: JSON.stringify(['https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=1000&auto=format&fit=crop'])
+  },
+  {
+    id: 5,
+    brand: 'Audi',
+    model: 'Q5 45 TFSI Quattro',
+    year: 2021,
+    price: 42000,
+    mileage: 28000,
+    transmission: 'Automático',
+    fuel: 'Híbrido',
+    images: JSON.stringify(['https://images.unsplash.com/photo-1541443131876-44b03de101c5?q=80&w=1000&auto=format&fit=crop'])
+  },
+  {
+    id: 6,
+    brand: 'Mercedes-Benz',
+    model: 'Clase C 200 Avantgarde',
+    year: 2023,
+    price: 49500,
+    mileage: 3500,
+    transmission: 'Automático',
+    fuel: 'Híbrido/Nafta',
+    images: JSON.stringify(['https://images.unsplash.com/photo-1622336496253-199651525547?q=80&w=1000&auto=format&fit=crop'])
   }
 ];
 
