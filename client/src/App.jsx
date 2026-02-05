@@ -205,7 +205,7 @@ const MOCK_CARS = [
     mileage: 15400,
     transmission: 'Automático',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1593714604578-d9e41b00c6c6?q=80&w=800&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1621339011221-16089853905c?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 2,
@@ -216,7 +216,7 @@ const MOCK_CARS = [
     mileage: 12100,
     transmission: 'Automático',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1556139930-c23fa4a4f934?q=80&w=800&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1555214107-f2e7c485a488?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 3,
@@ -227,7 +227,7 @@ const MOCK_CARS = [
     mileage: 20500,
     transmission: 'Automático',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1584345604481-0304e76993a4?q=80&w=800&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1549317661-bd348a54c2b1?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 4,
@@ -260,7 +260,7 @@ const MOCK_CARS = [
     mileage: 3500,
     transmission: 'Automático',
     fuel: 'Electrificado',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1622336496253-199651525547?q=80&w=800&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 7,
@@ -282,7 +282,7 @@ const MOCK_CARS = [
     mileage: 8500,
     transmission: '4x4 Automático',
     fuel: 'Diesel',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1606148332159-00109cc99da5?q=80&w=800&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1623910543632-159e19d53c3e?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 9,
@@ -304,7 +304,7 @@ const MOCK_CARS = [
     mileage: 1200,
     transmission: 'Direct Drive',
     fuel: 'Eléctrico',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1545641203-7d072a14e3b2?q=80&w=800&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1536700503339-1e4b06520771?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 11,
@@ -315,7 +315,7 @@ const MOCK_CARS = [
     mileage: 9400,
     transmission: 'Manual',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=800&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1594508601248-20d755714341?q=80&w=800&auto=format&fit=crop'])
   },
   {
     id: 12,
@@ -326,7 +326,7 @@ const MOCK_CARS = [
     mileage: 4200,
     transmission: 'Automático',
     fuel: 'Nafta',
-    images: JSON.stringify(['https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?q=80&w=800&auto=format&fit=crop'])
+    images: JSON.stringify(['https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop'])
   }
 ];
 
