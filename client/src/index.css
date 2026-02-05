@@ -2,16 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @theme {
-  --color-primary: #000000;
-  --color-accent: #2563EB;
-  --color-accent-hover: #1D4ED8;
+  --color-primary: #0B0E14;
+  --color-accent: #E10600;
+  --color-accent-hover: #B30500;
   --font-sans: 'Inter', sans-serif;
   --background-image-hero-pattern: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2000&auto=format&fit=crop');
 }
 
 :root {
-  --primary: #000000;
-  --accent: #2563EB;
+  --primary: #0B0E14;
+  --accent: #E10600;
 }
 
 body {
